@@ -318,7 +318,13 @@
       data.address = address;
       data.notes = notes;
 
-      console.log('Thor Funnel Submission:', data);
+ fetch("https://formspree.io/f/mlgowrkg", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+});
 
       clearError();
       step = 8;
