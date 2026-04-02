@@ -1,155 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Storm Damage Check | Thor Contractors</title>
- <style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storm Damage Check | Thor Contractors</title>
+
+<style>
 body {
-  font-family: Arial, sans-serif;
-  background: #F5F7FA;
-  margin: 0;
-  padding: 0;
+  font-family: Arial;
+  background:#F5F7FA;
 }
 
 .container {
-  max-width: 500px;
-  margin: 50px auto;
-  background: #FFFFFF;
-  padding: 25px;
-  border-radius: 14px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-  border-top: 6px solid #283B62;
+  max-width:500px;
+  margin:50px auto;
+  background:#fff;
+  padding:25px;
+  border-radius:14px;
+  border-top:6px solid #283B62;
 }
 
 h2 {
-  color: #283B62;
-  text-align: center;
+  color:#283B62;
+  text-align:center;
 }
 
 .btn {
-  width: 100%;
-  padding: 14px;
-  margin: 10px 0;
-  background: #5272B2;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  background:#5272B2;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
 }
 
 .btn:hover {
-  background: #283B62;
+  background:#283B62;
 }
 
 input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  box-sizing: border-box;
+  width:100%;
+  padding:12px;
+  margin:6px 0;
 }
 
 a button {
-  background: #ED930E;
-}
-
-a button:hover {
-  background: #c97a0c;
+  background:#ED930E;
 }
 </style>
+
 </head>
+
 <body>
 
 <div class="container" id="app"></div>
 
 <script>
-let step = 1;
-let data = {};
+let step=1;
+let data={};
 
-function render() {
-  const app = document.getElementById('app');
+function render(){
+const app=document.getElementById('app');
 
-  if (step === 1) {
-    app.innerHTML = `
-      <h2>What type of property is this?</h2>
-      <button class="btn" onclick="next('propertyType','Residential')">Residential</button>
-      <button class="btn" onclick="next('propertyType','Commercial')">Commercial</button>
-    `;
-  }
-
-  if (step === 2) {
-    if (data.propertyType === 'Residential') {
-      app.innerHTML = `
-        <h2>What are you seeing?</h2>
-        <button class="btn" onclick="next('issue','Missing shingles')">Missing shingles</button>
-        <button class="btn" onclick="next('issue','Leak')">Water stain or leak</button>
-        <button class="btn" onclick="next('issue','Other')">Other</button>
-      `;
-    } else {
-      app.innerHTML = `
-        <h2>Commercial issue?</h2>
-        <button class="btn" onclick="next('issue','Leak')">Roof leak</button>
-        <button class="btn" onclick="next('issue','Ponding')">Ponding water</button>
-        <button class="btn" onclick="next('issue','Other')">Other</button>
-      `;
-    }
-  }
-
-  if (step === 3) {
-    app.innerHTML = `
-      <h2>Roof age?</h2>
-      <button class="btn" onclick="next('age','0-5')">0-5 years</button>
-      <button class="btn" onclick="next('age','10-15')">10-15 years</button>
-      <button class="btn" onclick="next('age','20+')">20+ years</button>
-    `;
-  }
-
-  if (step === 4) {
-    app.innerHTML = `
-      <h2>How soon do you need help?</h2>
-      <button class="btn" onclick="next('urgency','Emergency')">Emergency</button>
-      <button class="btn" onclick="next('urgency','Soon')">This week</button>
-      <button class="btn" onclick="next('urgency','Later')">Just getting pricing</button>
-    `;
-  }
-
-  if (step === 5) {
-    app.innerHTML = `
-      <h2>Your info</h2>
-      <input placeholder="Name" id="name">
-      <input placeholder="Phone" id="phone">
-      <button class="btn" onclick="submitForm()">Submit</button>
-    `;
-  }
-
-  if (step === 6) {
-    app.innerHTML = `
-      <h2>Thanks!</h2>
-      <p>We’ll reach out shortly.</p>
-      <a href="tel:4403393225"><button class="btn">Call Now</button></a>
-    `;
-  }
+if(step===1){
+app.innerHTML=`
+<h2>What type of property is this?</h2>
+<button class="btn" onclick="next('type','Residential')">Residential</button>
+<button class="btn" onclick="next('type','Commercial')">Commercial</button>`;
 }
 
-function next(key, value) {
-  data[key] = value;
-  step++;
-  render();
+if(step===2){
+if(data.type==='Residential'){
+app.innerHTML=`
+<h2>What are you seeing?</h2>
+<button class="btn" onclick="next('issue','Shingles')">Missing shingles</button>
+<button class="btn" onclick="next('issue','Leak')">Water stain or leak</button>
+<button class="btn" onclick="next('issue','Exterior')">Siding / gutter damage</button>
+<button class="btn" onclick="next('issue','Unknown')">Not sure</button>`;
+}else{
+app.innerHTML=`
+<h2>Commercial issue?</h2>
+<button class="btn" onclick="next('issue','Leak')">Roof leak</button>
+<button class="btn" onclick="next('issue','Ponding')">Ponding water</button>
+<button class="btn" onclick="next('issue','Membrane')">Membrane damage</button>
+<button class="btn" onclick="next('issue','Unknown')">Not sure</button>`;
+}
 }
 
-function submitForm() {
-  data.name = document.getElementById('name').value;
-  data.phone = document.getElementById('phone').value;
+if(step===3){
+app.innerHTML=`
+<h2>How old is the roof?</h2>
+<button class="btn" onclick="next('age','0-5')">0-5 years</button>
+<button class="btn" onclick="next('age','10-15')">10-15 years</button>
+<button class="btn" onclick="next('age','15-20')">15-20 years</button>
+<button class="btn" onclick="next('age','20+')">20+ years</button>
+<button class="btn" onclick="next('age','Unknown')">Not sure</button>`;
+}
 
-  console.log(data);
-  step++;
-  render();
+if(step===4){
+if(data.type==='Residential'){
+app.innerHTML=`
+<h2>Did this happen after a storm?</h2>
+<button class="btn" onclick="next('storm','Yes')">Yes</button>
+<button class="btn" onclick="next('storm','No')">No</button>
+<button class="btn" onclick="next('storm','Unknown')">Not sure</button>`;
+}else{
+app.innerHTML=`
+<h2>What do you need?</h2>
+<button class="btn" onclick="next('need','Repair')">Repair</button>
+<button class="btn" onclick="next('need','Inspection')">Inspection</button>
+<button class="btn" onclick="next('need','Replace')">Replacement quote</button>`;
+}
+}
+
+if(step===5){
+app.innerHTML=`
+<h2>How soon do you need help?</h2>
+<button class="btn" onclick="next('urgency','Emergency')">Emergency</button>
+<button class="btn" onclick="next('urgency','Week')">This week</button>
+<button class="btn" onclick="next('urgency','Later')">Just getting pricing</button>`;
+}
+
+if(step===6){
+app.innerHTML=`
+<h2>Your info</h2>
+<input placeholder="Name" id="name">
+<input placeholder="Phone" id="phone">
+<button class="btn" onclick="submitForm()">Submit</button>`;
+}
+
+if(step===7){
+let message = "We’ll reach out shortly.";
+
+if(data.urgency==="Emergency" || data.issue==="Leak"){
+message = "This looks urgent. Call now or we’ll contact you ASAP.";
+}
+
+app.innerHTML=`
+<h2>Thanks!</h2>
+<p>${message}</p>
+<a href="tel:4403393225"><button class="btn">Call Now</button></a>`;
+}
+}
+
+function next(k,v){
+data[k]=v;
+step++;
+render();
+}
+
+function submitForm(){
+data.name=document.getElementById('name').value;
+data.phone=document.getElementById('phone').value;
+console.log(data);
+step++;
+render();
 }
 
 render();
